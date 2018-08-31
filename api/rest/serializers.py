@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from rest.models import Call, TelephoneBill
+from rest.models import Call, TelephoneBill, CallRecord
 from rest_framework import serializers
 from datetime import datetime
 
@@ -15,6 +15,20 @@ def validate_phone(value):
             ('%(value)s size number invalid'),
             params={'value': value},
         )
+
+
+def validate_type(value):
+    """Validate type of the call.
+
+    Keyword arguments:
+    value -- call type
+    """
+    if str(value) != 'start':
+        if str(value) != 'end':
+            raise ValidationError(
+                ('%(value)s call type invalid'),
+                params={'value': value},
+            )
 
 
 def validate_period(value):
@@ -54,3 +68,14 @@ class CallSerializer(serializers.Serializer):
 class TelephoneBillSerializer(serializers.Serializer):
     period = serializers.CharField(validators=[validate_period])
     telephone = serializers.IntegerField(validators=[validate_phone])
+
+
+class CallRecordSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    type = serializers.CharField(
+        validators=[validate_type], max_length=5, min_length=3)
+    timestamp = serializers.DateTimeField()
+    source = serializers.IntegerField(
+        validators=[validate_phone], default='', required=False)
+    destination = serializers.IntegerField(
+        validators=[validate_phone], default='', required=False)

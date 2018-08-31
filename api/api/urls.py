@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^call/$', views.save_call),
     url(r'^get-telephone-bill/$', views.get_telephone_bill),
-    url(r'^call-start/$', views.call_start_record)
+    url(r'^call-record/$', views.call_record)
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)

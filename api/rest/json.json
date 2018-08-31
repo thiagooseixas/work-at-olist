@@ -1,0 +1,22 @@
+[
+    [
+        {
+            "id": "01",
+            "type": "type",
+            "timestamp": "timestamp",
+            "call_id": "call_id",
+            "source": "source",
+            "destination": "destination"
+        },
+        {
+            "id": "01",
+            "type": "type",
+            "timestamp": "timestamp",
+            "call_id": "call_id"
+        }
+    ],
+    {
+        "telephone": "",
+        "reference_period": ""
+    }
+]
